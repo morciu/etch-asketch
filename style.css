@@ -43,6 +43,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 5px solid black;
 }
 
 .mid-right {
@@ -53,5 +54,15 @@ body {
     height: 80%;
     width: 80%;
     max-width: 500px;
-    background-color: violet;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.blankPixel {
+    background-color: white;
+}
+
+.coloredPixel {
+    background-color: black;
 }
