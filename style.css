@@ -5,6 +5,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0;
+    margin: 0;
 }
 
 .top,
@@ -15,10 +17,42 @@ body {
 
 .top {
     background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
 }
 
-.bottom {
-    background-color: chartreuse;
+#title {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 48px;
+    background-color: #2A2D43;
+    color: white;
+}
+
+#canvasControls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #2A2D43;
+    flex: 1 1 0%;
+}
+
+#clearButton {
+    background-color: #C6CA53;
+    border: none;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+}
+
+#clearButton:hover {
+    background-color: #F0EFF4;
+}
+
+.bottom,
+.mid-left,
+.mid-right {
+    background-color: #2A2D43;
 }
 
 .middle {
@@ -33,22 +67,17 @@ body {
     flex: 1 1 0%;
 }
 
-.mid-left {
-    background-color: crimson;
-}
+
 
 .mid-center {
-    background-color: white;
+    background-color: #F0EFF4;
     flex: 3 1 0%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 5px solid black;
-}
-
-.mid-right {
-    background-color: yellow;
+    align-items: stretch;
 }
 
 #canvas {
@@ -70,10 +99,8 @@ body {
     flex: 1 1 0%;
 }
 
-
-
 .blankPixel {
-    background-color: white;
+    background-color: #F0EFF4;
 }
 
 .coloredPixel {
