@@ -67,6 +67,26 @@ body {
     flex: 1 1 0%;
 }
 
+.mid-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#colorsButton {
+    background-color: #DA4167;
+    border: none;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    border-radius: 8px;
+}
+
+#colorsButton:hover {
+    background-color: #C6CA53;
+}
+
 
 
 .mid-center {
@@ -99,10 +119,11 @@ body {
     flex: 1 1 0%;
 }
 
+.pixel {
+    border: 1px solid black;
+}
+
 .blankPixel {
     background-color: #F0EFF4;
 }
 
-.coloredPixel {
-    background-color: black;
-}

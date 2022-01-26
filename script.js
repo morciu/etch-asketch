@@ -1,5 +1,12 @@
-// Color
-let color = 'black';
+// Buttons
+const clearButton = document.querySelector("#clearButton");
+const colorsButton = document.querySelector("#colorsButton");
+
+// Default Color
+let color = 'rgb(0, 0, 0)';
+
+// Toggle Wacky Colors - random rgb values
+let wackyColors = false;
 
 // Get canvas area
 let canvas = document.querySelector("#canvas");
@@ -13,7 +20,6 @@ let canvasW = 16;
 createNewCanvas(canvasH, canvasW);
 
 // Set event to clear canvas on clearButton and ask for new canvas size (max 100)
-const clearButton = document.querySelector("#clearButton");
 clearButton.addEventListener('click', () => {
     let pixels = document.querySelectorAll(".coloredPixel");
 
@@ -40,6 +46,18 @@ clearButton.addEventListener('click', () => {
 
 })
 
+// Set event to toggle Wacky Colors button on or off
+colorsButton.addEventListener('click', () => {
+    if (wackyColors) {
+        wackyColors = false;
+        colorsButton.style = "background-color: #DA4167;";
+    }
+    else {
+        wackyColors = true;
+        colorsButton.style = "background-color: #A8D0DB;";
+    }
+})
+
 
 function clearCanvasGrid() {
     let canvasPixels = document.querySelector("#canvas").childNodes;
@@ -58,16 +76,27 @@ function createNewCanvas(height, width) {
         // Create pixels
         for (let j = 0; j < canvasW; j++) {
             let pixel = document.createElement("div");
-            pixel.style = `border: 0.5px solid black;`;
-            pixel.classList = "blankPixel"
+            pixel.classList = "blankPixel pixel"
     
             // Set up a mouse-over (hover) effect to make the pixel change color
             pixel.addEventListener('mouseover', () => {
-                pixel.classList = "coloredPixel";
+                pixel.classList = "coloredPixel pixel";
+                // If wacky colors is on - generate random rgb values, else use black
+                if (wackyColors) {
+                    color = `rgb(${randomRgbValue()}, ${randomRgbValue()}, ${randomRgbValue()})`
+                }
+                else {
+                    color = 'rgb(0, 0, 0)';    
+                }
+                pixel.style = `background-color: ${color}`;
             })
     
             canvasRow.appendChild(pixel);
         }
         document.querySelector("#canvas").appendChild(canvasRow);
     }
+}
+
+function randomRgbValue() {
+    return Math.floor(Math.random() * 255);
 }
