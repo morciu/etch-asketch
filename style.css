@@ -41,6 +41,7 @@ body {
     background-color: white;
     flex: 3 1 0%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 5px solid black;
@@ -57,7 +58,19 @@ body {
     border: 2px solid black;
     display: flex;
     flex-direction: column;
+    align-self: center;
 }
+
+.pixelRow {
+    flex: 1 1 0%;
+}
+
+.blankPixel,
+.coloredPixel {
+    flex: 1 1 0%;
+}
+
+
 
 .blankPixel {
     background-color: white;
