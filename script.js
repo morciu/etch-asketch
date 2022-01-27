@@ -80,14 +80,32 @@ function createNewCanvas(height, width) {
     
             // Set up a mouse-over (hover) effect to make the pixel change color
             pixel.addEventListener('mouseover', () => {
-                pixel.classList = "coloredPixel pixel";
                 // If wacky colors is on - generate random rgb values, else use black
                 if (wackyColors) {
-                    color = `rgb(${randomRgbValue()}, ${randomRgbValue()}, ${randomRgbValue()})`
+                    // Check if pixel has already been colored, if so darken the color
+                    if (pixel.classList.contains("coloredPixel")) {
+                        // get colors
+                        let currentColorString = pixel.style.backgroundColor;
+
+                        // clean colors string
+                        let newColorVals = []
+                        currentColorString = currentColorString.replace("rgb(", "");
+                        currentColorString = currentColorString.replace(")", "");
+                        let currentColorArray = currentColorString.split(", ");
+                        currentColorArray.forEach((color) => {
+                            let colorVal = parseInt(color);
+                            newColorVals.push(darkenColor(colorVal));
+                        })
+                        color = `rgb(${newColorVals[0]}, ${newColorVals[1]}, ${newColorVals[2]})`;
+                    }
+                    else {
+                        color = `rgb(${randomRgbValue()}, ${randomRgbValue()}, ${randomRgbValue()})`;
+                    }
                 }
                 else {
                     color = 'rgb(0, 0, 0)';    
                 }
+                pixel.classList = "coloredPixel pixel";
                 pixel.style = `background-color: ${color}`;
             })
     
@@ -99,4 +117,8 @@ function createNewCanvas(height, width) {
 
 function randomRgbValue() {
     return Math.floor(Math.random() * 255);
+}
+
+function darkenColor(color) {
+    return Math.floor(color - (color / 10));
 }
