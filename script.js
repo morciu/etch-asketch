@@ -120,5 +120,10 @@ function randomRgbValue() {
 }
 
 function darkenColor(color) {
-    return Math.floor(color - (color / 10));
+    if (color < 10) {
+        return 0;
+    }
+    else {
+        return Math.floor(color - (color / 10));
+    }
 }
