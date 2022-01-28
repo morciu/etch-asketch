@@ -85,21 +85,36 @@ function createNewCanvas(height, width) {
                     // Check if pixel has already been colored, if so darken the color
                     if (pixel.classList.contains("coloredPixel")) {
                         // get colors
+                        let originalColorString = pixel.dataset.originalrgb;
                         let currentColorString = pixel.style.backgroundColor;
 
-                        // clean colors string
+                        // clean original color string
                         let newColorVals = []
+                        originalColorString = originalColorString.replace("rgb(", "");
+                        originalColorString = originalColorString.replace(")", "");
+                        let originalColorArray = originalColorString.split(", ");
+
+                        // clean current color string
                         currentColorString = currentColorString.replace("rgb(", "");
                         currentColorString = currentColorString.replace(")", "");
                         let currentColorArray = currentColorString.split(", ");
-                        currentColorArray.forEach((color) => {
+                
+                        if (pixel.dataset.originalrgb == pixel.style.backgroundColor) {
+                            originalColorArray.forEach((color) => {
                             let colorVal = parseInt(color);
                             newColorVals.push(darkenColor(colorVal));
-                        })
+                            })
+                        }
+                         else {
+                            for (let i=0; i < originalColorArray.length; i++) {
+                                newColorVals.push(currentColorArray[i] - (originalColorArray[i] / 10));
+                            }
+                        }
                         color = `rgb(${newColorVals[0]}, ${newColorVals[1]}, ${newColorVals[2]})`;
                     }
                     else {
                         color = `rgb(${randomRgbValue()}, ${randomRgbValue()}, ${randomRgbValue()})`;
+                        pixel.setAttribute("data-originalRGB", `${color}`);
                     }
                 }
                 else {
@@ -120,10 +135,5 @@ function randomRgbValue() {
 }
 
 function darkenColor(color) {
-    if (color < 10) {
-        return 0;
-    }
-    else {
-        return Math.floor(color - (color / 10));
-    }
+    return Math.floor(color - (color / 10));
 }

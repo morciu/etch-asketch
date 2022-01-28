@@ -120,10 +120,6 @@ body {
     flex: 1 1 0%;
 }
 
-.pixel {
-    border: 1px solid black;
-}
-
 .blankPixel {
     background-color: rgb(255, 255, 255);
 }
